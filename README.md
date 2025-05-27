@@ -1,22 +1,24 @@
 # xtts-finetune-webui
 
-TLDR: 
+**`TLDR`** 
 
 `docker run -it --gpus all -p 5003:5003 xtts-finetune-webui`
 
-Upload a 2min audio sample of the voice you want to train with and proceed through steps 1-5 to train the model. 
-When you download the optimized model ZIP, unpack it locally and rename `reference.wav` to `ref.wav`, `unoptimize_model.pth` to `model.pth`.
-Re-compress this with ZIP and upload/drop it into the xtts Fine Tuned Model. 
-You'll need to shell into the container and copy the uploaded files to the correct location, the UI will give you a path like `/app/models/__sessions/model-de0e319a-a6ef-4630-8c14-452a12be5099/xtts/optimized_model` but the actual files will be in a path like `/app/models/tts/models--coqui--XTTS-v2/snapshots/6c2b0d75eae4b7047358e3b6bd9325f857d43f77`, just copy them like:
+* Upload a 2min audio sample of the voice you want to train with and proceed through steps 1-5 to train the model. 
+* When you download the optimized model ZIP, unpack it locally and rename `reference.wav` to `ref.wav`, `unoptimize_model.pth` to `model.pth`.
+* Re-compress this with ZIP and upload/drop it into the xtts Fine Tuned Model. 
+* You'll need to shell into the container and copy the uploaded files to the correct location, the UI will give you a path like `/app/models/__sessions/model-de0e319a-a6ef-4630-8c14-452a12be5099/xtts/optimized_model` but the actual files will be in a path like `/app/models/tts/models--coqui--XTTS-v2/snapshots/6c2b0d75eae4b7047358e3b6bd9325f857d43f77`, just copy them like:
 ```
 docker exec -it ebook2audiobook-ebook2audiobook-1 bash
 cp /app/models/tts/models--coqui--XTTS-v2/snapshots/6c2b0d75eae4b7047358e3b6bd9325f857d43f77/* /app/models/__sessions/model-de0e319a-a6ef-4630-8c14-452a12be5099/xtts/optimized_model
 ```
-The `ref.wav` that was in the uploaded ZIP file will need to be manually copied into the container and put into the models session path.
+* The `ref.wav` that was in the uploaded ZIP file will need to be manually copied into the container and put into the models session path.
 ```
 docker cp ref.wav ebook2audiobook-ebook2audiobook-1:/app/models/__sessions/model-de0e319a-a6ef-4630-8c14-452a12be5099/xtts/optimized_model
-``
-You should now be able to select the `optimized_model` from the pull down menu and use it.
+```
+* You should now be able to select the `optimized_model` from the pull down menu and use it.
+
+**`END TLDR`**
 
 ---
 
